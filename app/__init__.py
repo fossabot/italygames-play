@@ -28,7 +28,6 @@ def create_app(config_name):
     # migrate setup
     migrate = Migrate(app, db)
 
-
     from app import models
 
     return app
