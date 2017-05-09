@@ -6,12 +6,15 @@ from .. import db
 from ..models import User
 from oauth import OAuthSignIn
 
+
+# TODO: comments
 @auth.route('/authorize/<provider>')
 def oauth_authorize(provider):
     if not current_user.is_anonymous:
         return redirect(url_for('home.dashboard'))
     oauth = OAuthSignIn.get_provider(provider)
     return oauth.authorize()
+
 
 @auth.route('/callback/<provider>')
 def oauth_callback(provider):
@@ -32,6 +35,7 @@ def oauth_callback(provider):
     login_user(user, True)
 
     return redirect(url_for('home.dashboard'))
+
 
 @auth.route('/logout')
 @login_required

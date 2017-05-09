@@ -1,6 +1,11 @@
-from .. import oauth
+import json
+from uuid import uuid4
+
+from flask import current_app, url_for, redirect, request
+from rauth import OAuth2Service
 
 
+# TODO: comments
 class OAuthSignIn(object):
     providers = None
 
@@ -16,8 +21,8 @@ class OAuthSignIn(object):
     def callback(self):
         raise NotImplementedError("Callback method not implemented")
 
-    def get_callback(self):
-        return url_for('oauth_callback',
+    def get_callback_url(self):
+        return url_for('auth.oauth_callback',
                        provider=self.provider_name,
                        _external=True)
 
@@ -34,17 +39,39 @@ class OAuthSignIn(object):
 class RedditSignIn(OAuthSignIn):
     def __init__(self):
         super(RedditSignIn, self).__init__('reddit')
-        self.service = oauth.remote_app('reddit',
-            consumer_key=self.consumer_id,
-            consumer_secret=self.consumer_secret,
+        self.service = OAuth2Service(
+            name='reddit',
+            client_id=self.consumer_id,
+            client_secret=self.consumer_secret,
             base_url='https://www.reddit.com/api/v1/',
-            request_token_url=None,
             authorize_url='https://www.reddit.com/api/v1/authorize',
             access_token_url='https://www.reddit.com/api/v1/access_token'
         )
 
+    # TODO: choose between temporary and permanent access
     def authorize(self):
-        pass
+        state = str(uuid4())
+        return redirect(self.service.get_authorize_url(
+            response_type='code',
+            duration='permanent',
+            scope='identity',
+            state=state,
+            redirect_uri=self.get_callback_url())
+        )
 
     def callback(self):
-        pass
+        def decode_json(payload):
+            return json.loads(payload.decode('utf-8'))
+
+        if 'code' not in request.args:
+            return None, None
+
+        data = {
+            'grant_type': 'authorization_code',
+            'code': request.args['code'],
+            'redirect_uri': self.get_callback_url()
+        }
+        oauth_session = self.service.get_auth_session(data=data, decoder=decode_json)
+        me = oauth_session.get('me')
+
+        return (me.get('id'), me.get('name'))
