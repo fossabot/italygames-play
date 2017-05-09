@@ -15,11 +15,6 @@ def create_app(config_name):
     app.config.from_pyfile('config.py')
     db.init_app(app)
 
-    # test route -- to remove
-    @app.route('/')
-    def hello_world():
-        return 'Hello, world!'
-
     # login manager setup
     lm.init_app(app)
     lm.login_message = "You must be logged in to access this page"

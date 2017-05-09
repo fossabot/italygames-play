@@ -4,9 +4,7 @@
     ~ Requisiti
 
         1. MySQL con default port
-        2. Flask, SQLAlchemy e mysql-python
-
-        Alternativamente pip install -r requirements.txt
+        2. pip install -r requirements.txt
 
     ~ Configurazione
 
@@ -15,6 +13,10 @@
         3. Export env variables FLASK_CONFIG e FLASK_APP, es:
             export FLASK_CONFIG=development
             export FLASK_APP=run.py
+        4. Setup DB
+            flask db init
+            flask db migrate
+            flask db upgrade
 
     ~ Esecuzione
 
