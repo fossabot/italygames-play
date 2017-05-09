@@ -1,0 +1,22 @@
+                    / italygames-play /
+
+
+    ~ Requisiti
+
+        1. MySQL con default port
+        2. Flask, SQLAlchemy e mysql-python
+
+        Alternativamente pip install -r requirements.txt
+
+    ~ Configurazione
+
+        1. User play_admin DB play_db
+        2. File instance/config.py con SECRET_KEY e SQLALCHEMY_DATABASE_URI
+        3. Export env variables FLASK_CONFIG e FLASK_APP, es:
+            export FLASK_CONFIG=development
+            export FLASK_APP=run.py
+
+    ~ Esecuzione
+
+        Locale: flask run
+        Accessibile esterno: flask run --host=0.0.0.0
