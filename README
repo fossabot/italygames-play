@@ -4,7 +4,7 @@
     ~ Requisiti
 
         1. MySQL con default port
-        2. pip install -r requirements.txt
+        2. docker o pip install -r requirements.txt
 
     ~ Configurazione
 
@@ -18,7 +18,13 @@
             flask db migrate
             flask db upgrade
 
+        Docker: docker build -t igplay:latest .
+
     ~ Esecuzione
+
+        Docker frontground: docker run -p 5000:5000 igplay
+        Docker background:  docker run -d -p 5000:5000 igplay
 
         Locale: flask run
         Accessibile esterno: flask run --host=0.0.0.0
+
