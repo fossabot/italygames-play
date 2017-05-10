@@ -43,25 +43,31 @@ class RedditSignIn(OAuthSignIn):
             name='reddit',
             client_id=self.consumer_id,
             client_secret=self.consumer_secret,
-            base_url='https://www.reddit.com/api/v1/',
-            authorize_url='https://www.reddit.com/api/v1/authorize',
-            access_token_url='https://www.reddit.com/api/v1/access_token'
+            base_url='https://oauth.reddit.com/api/v1/',
+            #'https://www.reddit.com/api/v1/',
+            authorize_url='https://ssl.reddit.com/api/v1/authorize',
+            #'https://www.reddit.com/api/v1/authorize',
+            access_token_url='https://ssl.reddit.com/api/v1/access_token'
+            #'https://www.reddit.com/api/v1/access_token'
         )
 
     # TODO: choose between temporary and permanent access
     def authorize(self):
         state = str(uuid4())
-        return redirect(self.service.get_authorize_url(
+        response = redirect(self.service.get_authorize_url(
             response_type='code',
             duration='permanent',
             scope='identity',
             state=state,
             redirect_uri=self.get_callback_url())
         )
+        response.headers['User-Agent'] = 'italygames:play:0.1'
+
+        return response
 
     def callback(self):
-        def decode_json(payload):
-            return json.loads(payload.decode('utf-8'))
+        #def decode_json(payload):
+        #    return json.loads(payload.decode('utf-8'))
 
         if 'code' not in request.args:
             return None, None
@@ -71,7 +77,14 @@ class RedditSignIn(OAuthSignIn):
             'code': request.args['code'],
             'redirect_uri': self.get_callback_url()
         }
-        oauth_session = self.service.get_auth_session(data=data, decoder=decode_json)
-        me = oauth_session.get('me')
 
-        return (me.get('id'), me.get('name'))
+        oauth_session = self.service.get_auth_session(
+            data=data,
+            decoder=json.loads,
+            auth=(self.consumer_id, self.consumer_secret)
+        )
+        #, decoder=decode_json)
+        me = oauth_session.get('me').json()
+        current_app.logger.info(me)
+
+        return me['id'], me['name']

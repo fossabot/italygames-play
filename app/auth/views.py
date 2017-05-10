@@ -1,4 +1,4 @@
-from flask import flash, redirect, url_for
+from flask import flash, redirect, url_for, current_app
 from flask_login import login_required, login_user, logout_user, current_user
 
 from . import auth
@@ -18,21 +18,21 @@ def oauth_authorize(provider):
 
 @auth.route('/callback/<provider>')
 def oauth_callback(provider):
-    if not current_user.is_anonymous():
+    if not current_user.is_anonymous:
         return redirect(url_for('home.dashboard'))
     oauth = OAuthSignIn.get_provider(provider)
     social_id, username = oauth.callback()
 
     if social_id is None:
         flash('Authentication failed')
-        return redirect(url_for('home'))
+        return redirect(url_for('home.homepage'))
 
     user = User.query.filter_by(social_id=social_id).first()
     if not user:
         user = User(social_id=social_id, username=username)
         db.session.add(user)
         db.session.commit()
-    login_user(user, True)
+    login_user(user)
 
     return redirect(url_for('home.dashboard'))
 
@@ -41,4 +41,4 @@ def oauth_callback(provider):
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('home.homepage'))
