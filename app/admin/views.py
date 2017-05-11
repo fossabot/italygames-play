@@ -25,7 +25,7 @@ def list_games():
                            title='Games')
 
 
-@admin.route('games/add', methods=['GET', 'POST'])
+@admin.route('/games/add', methods=['GET', 'POST'])
 @login_required
 def add_game():
     """Adds game to database"""
@@ -52,7 +52,7 @@ def add_game():
                            title='Add Game')
 
 
-@admin.route('games/edit/<int:id>', methods=['GET', 'POST'])
+@admin.route('/games/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_game(id):
     """Edit extisting game"""
@@ -78,7 +78,7 @@ def edit_game(id):
                            title='Edit Game')
 
 
-@admin.route('games/delete/<int:id>', methods=['GET', 'POST'])
+@admin.route('/games/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_game(id):
     """Delete existing game"""
