@@ -14,6 +14,7 @@ class OAuthSignIn(object):
         credentials = current_app.config['OAUTH_CREDENTIALS'][provider_name]
         self.consumer_id = credentials['id']
         self.consumer_secret = credentials['secret']
+        self.useragent = 'italygames:play:0.1'
 
     def authorize(self):
         raise NotImplementedError("Authorize method not implemented")
@@ -61,13 +62,12 @@ class RedditSignIn(OAuthSignIn):
             state=state,
             redirect_uri=self.get_callback_url())
         )
-        response.headers['User-Agent'] = 'italygames:play:0.1'
+        response.headers['User-Agent'] = self.useragent
 
         return response
 
     def callback(self):
-        #def decode_json(payload):
-        #    return json.loads(payload.decode('utf-8'))
+        headers = {'user-agent': self.useragent}
 
         if 'code' not in request.args:
             return None, None
@@ -81,10 +81,11 @@ class RedditSignIn(OAuthSignIn):
         oauth_session = self.service.get_auth_session(
             data=data,
             decoder=json.loads,
+            headers=headers,
             auth=(self.consumer_id, self.consumer_secret)
         )
-        #, decoder=decode_json)
-        me = oauth_session.get('me').json()
-        current_app.logger.info(me)
+
+        me = oauth_session.get('me',
+                headers=headers).json()
 
         return me['id'], me['name']
