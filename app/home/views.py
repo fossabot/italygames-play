@@ -3,10 +3,12 @@ from flask_login import login_required
 
 from . import home
 
+
 @home.route('/')
 def homepage():
     """Renders homepage template"""
     return render_template('home/index.html', title='Ciao, mondo!')
+
 
 @home.route('/dashboard')
 @login_required
