@@ -1,20 +1,16 @@
 from flask_login import UserMixin
 
-# imports application and login manager
+#Imports application and login manager
 from app import db, lm
 
-"""
-Create helper table for user and game relationship
-"""
+"""Create helper table for user and game relationship"""
 usergames = db.Table('usergames', db.Model.metadata,
                 db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
                 db.Column('game_isr', db.Integer, db.ForeignKey('games.id')))
 
 
 class User(UserMixin, db.Model):
-    """
-    Defines user table
-    """
+    """Defines user table"""
 
     __tablename__ = 'users'
 
@@ -34,16 +30,14 @@ def load_user(id):
 
 
 class Game(db.Model):
-    """
-    Defines game table
-    """
+    """Defines game table"""
 
     __tablename__ = 'games'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
-    # so that we can use game.users and user.games to get list of
-    # matching items
+    #So that we can use game.users and user.games to get list of
+    #matching items
     users = db.relationship('User',
                             secondary=usergames,
                             backref='games',

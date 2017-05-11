@@ -1,3 +1,7 @@
+"""
+Routes for auth module
+"""
+
 from flask import flash, redirect, url_for, current_app
 from flask_login import login_required, login_user, logout_user, current_user
 
@@ -7,9 +11,18 @@ from ..models import User
 from oauth import OAuthSignIn
 
 
-# TODO: comments
 @auth.route('/authorize/<provider>')
 def oauth_authorize(provider):
+    """
+    Handles auth call to OAuth provider
+
+    Obtains the specified provider authorize method and calls it.
+
+    Parameters
+    ----------
+    provider : str
+        Provider name corresponding to the OAuthSignIn.provider_name
+    """
     if not current_user.is_anonymous:
         return redirect(url_for('home.dashboard'))
     oauth = OAuthSignIn.get_provider(provider)
@@ -18,6 +31,18 @@ def oauth_authorize(provider):
 
 @auth.route('/callback/<provider>')
 def oauth_callback(provider):
+    """
+    Handles redirect back from OAuth provider
+
+    Obtains the specified provider callback method and calls it for
+    authentication. If successful checks the db and register new user when
+    necessary. Then logins via flask-login and redirects to the dashboard.
+
+    Parameters
+    ----------
+    provider : str
+        Provider name corresponding to the OAuthSignIn.provider_name
+    """
     if not current_user.is_anonymous:
         return redirect(url_for('home.dashboard'))
     oauth = OAuthSignIn.get_provider(provider)
@@ -40,5 +65,6 @@ def oauth_callback(provider):
 @auth.route('/logout')
 @login_required
 def logout():
+    """Log user out of the session via flask-login"""
     logout_user()
     return redirect(url_for('home.homepage'))

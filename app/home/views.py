@@ -5,12 +5,11 @@ from . import home
 
 @home.route('/')
 def homepage():
-    """
-    Render homepage template on route /
-    """
+    """Renders homepage template"""
     return render_template('home/index.html', title='Ciao, mondo!')
 
 @home.route('/dashboard')
 @login_required
 def dashboard():
+    """Renders dashboard template if logged in"""
     return render_template('home/dashboard.html', title='Dashboard')
