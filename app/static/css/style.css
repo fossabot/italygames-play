@@ -25,6 +25,23 @@ body, html {
     height: auto;
 }
 
+.outer {
+    display: table;
+    position: absolute;
+    height: 70%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 footer {
     padding: 50px 0;
 }

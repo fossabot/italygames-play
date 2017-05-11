@@ -1,11 +1,14 @@
 import logging
 from logging import StreamHandler
 
+# Third-party imports
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
+# Local imports
 from config import app_config
 
 db = SQLAlchemy()
@@ -19,6 +22,9 @@ def create_app(config_name):
     # Loads config.py and instance/config.py
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
+
+    # Bootstrap setup
+    Bootstrap(app)
 
     # db setup
     db.init_app(app)
@@ -40,6 +46,9 @@ def create_app(config_name):
     from app import models
 
     # Imports all the blueprints
+    from .admin import admin as admin_blueprint
+    app.register_blueprint(admin_blueprint, url_prefix='/admin')
+
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
