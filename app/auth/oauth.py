@@ -87,7 +87,8 @@ class RedditSignIn(OAuthSignIn):
         """
         Calls the reddit authorize endpoint.
 
-        Sets up a custom user-agent because Reddit will only handle around 60 calls/mins for each user-agent. Using the default one will result
+        Sets up a custom user-agent because Reddit will only handle around 60
+        calls/mins for each user-agent. Using the default one will result
         in a lot of 429 errors.
         """
         state = str(uuid4())

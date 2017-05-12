@@ -2,7 +2,7 @@
 Routes for auth module
 """
 
-from flask import flash, redirect, url_for, current_app
+from flask import flash, redirect, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 
 from . import auth
