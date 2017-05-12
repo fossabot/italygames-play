@@ -9,14 +9,23 @@
     ~ Configurazione
 
         1. User play_admin DB play_db
-        2. File instance/config.py con SECRET_KEY e SQLALCHEMY_DATABASE_URI
-        3. Export env variables FLASK_CONFIG e FLASK_APP, es:
-            export FLASK_CONFIG=development
-            export FLASK_APP=run.py
-        4. Setup DB
-            flask db init
-            flask db migrate
-            flask db upgrade
+        2. File instance/config.py con
+            - SECRET_KEY
+            - SQLALCHEMY_DATABASE_URI
+            - OAUTH_CREDENTIALS = {
+                'provider_name': {
+                    'id': 'provider_id',
+                    'secret': 'provider_secret'
+                }
+            }
+        3. Export env variables:
+            - export FLASK_CONFIG=development
+            - export FLASK_APP=run.py
+            - export FLASK_DEBUG=1
+        4. Setup DB (cancellare contenuto migration se necessario)
+            - flask db init
+            - flask db migrate
+            - flask db upgrade
 
         Docker: docker build -t igplay:latest .
 
@@ -25,6 +34,6 @@
         Docker frontground: docker run -p 5000:5000 igplay
         Docker background:  docker run -d -p 5000:5000 igplay
 
-        Locale: flask run
-        Accessibile esterno: flask run --host=0.0.0.0
+        Locale: gunicorn -w 4 --log-file - run:app
+        Accessibile esterno: gunicorn -w 4 -b 0.0.0.0:5000 --log-file - run:app
 
