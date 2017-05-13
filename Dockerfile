@@ -10,4 +10,4 @@ COPY . /web
 ENV FLASK_CONFIG=development
 ENV FLASK_APP=run.py
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["python", "manage.py", "runserver", "-h", "0.0.0.0"]

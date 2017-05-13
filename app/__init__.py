@@ -5,7 +5,8 @@ from logging import StreamHandler
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
-from flask_migrate import Migrate
+#from flask_script import Manager
+from flask_migrate import Migrate#, MigrateCommand
 from flask_sqlalchemy import SQLAlchemy
 
 # Local imports
@@ -67,5 +68,10 @@ def create_app(config_name):
     @app.errorhandler(500)
     def internal_server_error(error):
         return render_template('errors/500.html', title='Server Error'), 500
+
+    # Manager setup
+    #manager = Manager(app)
+
+    #manager.add_command('db', MigrateCommand)
 
     return app
