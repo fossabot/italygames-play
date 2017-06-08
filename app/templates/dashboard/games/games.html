@@ -1,0 +1,44 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        <h1 style="text-align:center;">Games</h1>
+        {% if games %}
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th width="85%"> Name </th>
+                  <th width="15%"> User Count </th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for (id, name, users_count) in games %}
+                <tr>
+                  <td> <a href="{{ url_for('dashboard.view_game', id=id) }}"">{{ name }}</a></td>
+                  <td>
+
+                    {{ users_count}}
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center">
+        {% else %}
+          <div style="text-align: center">
+            <h3> No games have been added. </h3>
+            <hr class="intro-divider">
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
