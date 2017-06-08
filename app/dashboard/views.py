@@ -23,8 +23,7 @@ def homepage():
 def games_list(page):
     games = db.session.query(Game.id, Game.name, Game.num_of_users) \
         .order_by(Game.num_of_users.desc()) \
-        .paginate(page, PER_PAGE, error_out=False) \
-        .items
+        .paginate(page, PER_PAGE, error_out=False)
 
     return render_template('dashboard/games/games.html',
                            games=games,
