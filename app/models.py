@@ -32,7 +32,7 @@ class User(UserMixin, db.Model):
             return self
 
     def has_game(self, game):
-        return self.games.filter(usergames.c.user_id == user.id).count() > 0
+        return self.games.filter(usergames.c.game_id == game.id).count() > 0
 
     def __repr__(self):
         return '<User: {}>'.format(self.username)

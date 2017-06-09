@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {% if game %}
+          <h1 style="text-align:center;">{{ game.name }}</h1>
+          <hr class="intro-divider">
+          <div class="center">
+          <ul>
+            <li>Num of users: {{ num_of_users }}</li>
+            {% if game.users %}
+              <ul>
+              {% for user in game.users %}
+                <li>{{ user.username }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          </ul>
+          </div>
+        {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
