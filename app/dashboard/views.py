@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for
+from flask import abort, render_template, redirect, url_for
 from flask_login import login_required
 
 from . import dashboard
@@ -69,3 +69,37 @@ def unfollow_game(game_id, user_id):
 
     return redirect(url_for('dashboard.list_games'))
     return render_template(title='Unfollow Game')
+
+
+@dashboard.route('/users', defaults={'page': 1})
+@dashboard.route('/users/page/<int:page>')
+def list_users(page):
+    users = User.query.paginate(page, PER_PAGE, error_out=False)
+
+    return render_template('dashboard/users/users.html',
+                           users=users,
+                           title='Users')
+
+
+@dashboard.route('/user/<string:username>')
+def view_user(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(404)
+
+    return render_template('dashboard/users/user.html',
+                           user=user,
+                           title=username)
+
+
+@dashboard.route('game/<int:game_id>/users', defaults={'page': 1})
+@dashboard.route('game/<int:game_id>/users/page/<int:page>')
+def view_users_per_game(game_id, page):
+    game = Game.query.get_or_404(game_id)
+    users = User.query \
+            .filter(User.games.contains(game)) \
+            .paginate(page, PER_PAGE, error_out=False)
+
+    return render_template('dashboard/users/users.html',
+                           users=users,
+                           title='Users')

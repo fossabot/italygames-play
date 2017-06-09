@@ -33,8 +33,11 @@
                         <li><a href="{{ url_for('admin.list_games') }}">Manage Games</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('dashboard.list_games') }}">Games</a></li>
+                    <li><a href="{{ url_for('dashboard.list_users') }}">Users</a></li>
                     <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-                    <li><a><i class="fa fa-user"></i>  Ciao, {{ current_user.username }}!</a></li>
+                    <li><a href="{{ url_for('dashboard.view_user', username=current_user.username) }}">
+                        <i class="fa fa-user"></i>  Ciao, {{ current_user.username }}!
+                    </a></li>
                 {% else %}
                     <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
                     <li><a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">Login</a></li>
@@ -69,6 +72,8 @@
                 <li class="footer-menu-divider">⋅</li>
                     {% if current_user.is_authenticated %}
                         <li><a href="{{ url_for('dashboard.list_games') }}">Games</a></li>
+                        <li class="footer-menu-divider">⋅</li>
+                        <li><a href="{{ url_for('dashboard.list_users') }}">Users</a></li>
                         <li class="footer-menu-divider">⋅</li>
                         <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                     {% else %}
