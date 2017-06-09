@@ -1,6 +1,5 @@
 from flask import render_template, current_app, redirect, url_for
 from flask_login import login_required
-from sqlalchemy.sql import func
 
 from . import dashboard
 from .. import db
