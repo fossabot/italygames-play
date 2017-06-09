@@ -42,9 +42,6 @@ def create_app(config_name):
     handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
 
-    # Imports db models
-    from app import models
-
     # Imports all the blueprints
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
@@ -52,10 +49,14 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
+    from .dashboard import dashboard as dashboard_blueprint
+    app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
+
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
 
     # Error handling
+    # Redirects to HTTP error pages
     @app.errorhandler(403)
     def forbidden(error):
         return render_template('errors/403.html', title='Forbidden'), 403
@@ -67,5 +68,15 @@ def create_app(config_name):
     @app.errorhandler(500)
     def internal_server_error(error):
         return render_template('errors/500.html', title='Server Error'), 500
+
+    # Session handling
+    # Necessary to refresh sessions and reflect data changes
+    @app.before_request
+    def startup_session():
+        db.session = db.create_scoped_session()
+
+    @app.teardown_request
+    def shutdown_session(exception=None):
+        db.session.close()
 
     return app

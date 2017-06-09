@@ -32,7 +32,7 @@
                     {% if current_user.is_admin %}
                         <li><a href="{{ url_for('admin.list_games') }}">Manage Games</a></li>
                     {% endif %}
-                    <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('dashboard.list_games') }}">Games</a></li>
                     <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                     <li><a><i class="fa fa-user"></i>  Ciao, {{ current_user.username }}!</a></li>
                 {% else %}
@@ -44,6 +44,15 @@
     </div>
 </nav>
 <div class="wrapper">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     <!-- Body -->
     {% block body %}
     {% endblock %}
@@ -59,7 +68,7 @@
                 <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
                 <li class="footer-menu-divider">⋅</li>
                     {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url_for('dashboard.list_games') }}">Games</a></li>
                         <li class="footer-menu-divider">⋅</li>
                         <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                     {% else %}

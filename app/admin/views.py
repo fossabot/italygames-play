@@ -33,6 +33,7 @@ def add_game():
     add_game = True
     form = GameForm()
 
+    # Checks if form is valid
     if form.validate_on_submit():
         game = Game(name=form.name.data)
 
@@ -61,6 +62,7 @@ def edit_game(id):
     game = Game.query.get_or_404(id)
     form = GameForm(obj=game)
 
+    # Checks if form is valid
     if form.validate_on_submit():
         game.name = form.name.data
         db.session.commit()
