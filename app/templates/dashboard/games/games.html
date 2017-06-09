@@ -29,9 +29,11 @@
                   </td>
                   <td>
                     {% if game in current_user.games %}
-                      <a href="{{ url_for('dashboard.unfollow_game', game_id=game.id, user_id=current_user.id) }}">Unfollow</a>
+                      <a href="{{ url_for('dashboard.unfollow_game', game_id=game.id, user_id=current_user.id) }}">
+                        <i class="fa fa-minus"></i> Unfollow</a>
                     {% else %}
-                      <a href="{{ url_for('dashboard.follow_game', game_id=game.id, user_id=current_user.id) }}">Follow</a>
+                      <a href="{{ url_for('dashboard.follow_game', game_id=game.id, user_id=current_user.id) }}">
+                        <i class="fa fa-plus"></i> Follow</a>
                     {% endif %}
                   </td>
                 </tr>
