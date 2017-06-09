@@ -60,7 +60,7 @@ class Game(db.Model):
     @hybrid_property
     def num_of_users(self):
         if self.users:
-            return len(self.users)
+            return self.users.count()
         return 0
 
     @num_of_users.expression
