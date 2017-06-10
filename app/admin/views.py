@@ -6,6 +6,8 @@ from forms import GameForm
 from .. import db
 from ..models import Game
 
+PER_PAGE = 10
+
 
 def check_admin():
     """Prevents non-admins from accessing the page"""
@@ -13,12 +15,13 @@ def check_admin():
         abort(403)
 
 
-@admin.route('/games', methods=['GET', 'POST'])
+@admin.route('/games', defaults={'page': 1})
+@admin.route('/games/page/<int:page>')
 @login_required
-def list_games():
+def list_games(page):
     """List all games"""
     check_admin()
-    games = Game.query.all()
+    games = Game.query.paginate(page, PER_PAGE, error_out=False)
 
     return render_template('admin/games/games.html',
                            games=games,
@@ -92,4 +95,4 @@ def delete_game(id):
     flash('Game successfully deleted')
 
     return redirect(url_for('admin.list_games'))
-    return render_template(title='Delete Game')
+    # return render_template(title='Delete Game')

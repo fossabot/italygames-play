@@ -5,7 +5,7 @@ from . import dashboard
 from .. import db
 from ..models import Game, User
 
-PER_PAGE = 15
+PER_PAGE = 10
 
 
 @dashboard.route('/')
@@ -52,7 +52,7 @@ def follow_game(game_id, user_id):
     db.session.commit()
 
     return redirect(url_for('dashboard.list_games'))
-    return render_template(title='Follow Game')
+    # return render_template(title='Follow Game')
 
 
 @dashboard.route('/game/<int:game_id>/unfollow/<int:user_id>',
@@ -67,7 +67,7 @@ def unfollow_game(game_id, user_id):
     db.session.commit()
 
     return redirect(url_for('dashboard.list_games'))
-    return render_template(title='Unfollow Game')
+    # return render_template(title='Unfollow Game')
 
 
 @dashboard.route('/users', defaults={'page': 1})
