@@ -3,8 +3,7 @@ from flask_login import login_required
 
 from . import dashboard
 from .. import db
-from ..models import Game, User, usergames
-
+from ..models import Game, User
 
 PER_PAGE = 15
 
@@ -92,13 +91,10 @@ def view_user(username):
                            title=username)
 
 
-@dashboard.route('game/<int:game_id>/users', defaults={'page': 1})
-@dashboard.route('game/<int:game_id>/users/page/<int:page>')
-def view_users_per_game(game_id, page):
+@dashboard.route('game/<int:game_id>/users')
+def view_users_per_game(game_id):
     game = Game.query.get_or_404(game_id)
-    users = User.query \
-            .filter(User.games.contains(game)) \
-            .paginate(page, PER_PAGE, error_out=False)
+    users = User.query.filter(game in User.games).all()
 
     return render_template('dashboard/users/users.html',
                            users=users,

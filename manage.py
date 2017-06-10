@@ -2,7 +2,7 @@ import os
 import sys
 
 from flask_migrate import MigrateCommand
-from flask_script import Manager, Command, Option
+from flask_script import Manager
 
 from app import create_app, db
 
@@ -19,7 +19,6 @@ def gunicorn(host, port, workers):
     from gunicorn.app.base import Application
 
     class FlaskApplication(Application):
-
         def init(self, parser, opts, args):
             return {
                 'bind': '{0}:{1}'.format(host, port),
