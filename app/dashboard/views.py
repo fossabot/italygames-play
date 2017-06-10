@@ -91,8 +91,8 @@ def view_user(username):
                            title=username)
 
 
-@dashboard.route('game/<int:game_id>/users', defaults={'page': 1})
-@dashboard.route('game/<int:game_id>/users/page/<int:page>')
+@dashboard.route('/game/<int:game_id>/users', defaults={'page': 1})
+@dashboard.route('/game/<int:game_id>/users/page/<int:page>')
 def view_users_per_game(game_id, page):
     game = Game.query.get_or_404(game_id)
     users = User.query \
@@ -101,4 +101,19 @@ def view_users_per_game(game_id, page):
 
     return render_template('dashboard/users/users.html',
                            users=users,
-                           title='Users')
+                           title='Users following ' + game.name)
+
+
+@dashboard.route('/user/<string:username>/games', defaults={'page': 1})
+@dashboard.route('/user/<string:username>/games/page/<int:page>')
+def view_games_per_user(username, page):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(404)
+    games = Game.query \
+        .filter(Game.users.contains(user)) \
+        .paginate(page, PER_PAGE, error_out=None)
+
+    return render_template('dashboard/games/games.html',
+                           games=games,
+                           title='Games of ' + username)
