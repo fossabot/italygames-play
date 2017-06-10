@@ -14,7 +14,9 @@
                                 {% if game.users %}
                                     <ul>
                                         {% for user in game.users %}
-                                            <li>{{ user.username }}</li>
+                                            <li><a href="{{ url_for('dashboard.view_user', username=user.username) }}">
+                                                {{ user.username }}
+                                            </a></li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
