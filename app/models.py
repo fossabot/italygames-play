@@ -6,8 +6,8 @@ from app import db, lm
 
 """Create helper table for user and game relationship"""
 usergames = db.Table('usergames', db.Model.metadata,
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-    db.Column('game_id', db.Integer, db.ForeignKey('games.id')))
+                     db.Column('user_id', db.Integer,db.ForeignKey('users.id')),
+                     db.Column('game_id', db.Integer,db.ForeignKey('games.id')))
 
 
 class User(UserMixin, db.Model):
