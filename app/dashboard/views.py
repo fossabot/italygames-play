@@ -91,10 +91,13 @@ def view_user(username):
                            title=username)
 
 
-@dashboard.route('game/<int:game_id>/users')
-def view_users_per_game(game_id):
+@dashboard.route('game/<int:game_id>/users', defaults={'page': 1})
+@dashboard.route('game/<int:game_id>/users/page/<int:page>')
+def view_users_per_game(game_id, page):
     game = Game.query.get_or_404(game_id)
-    users = User.query.filter(game in User.games).all()
+    users = User.query \
+        .filter(User.games.contains(game)) \
+        .paginate(page, PER_PAGE, error_out=None)
 
     return render_template('dashboard/users/users.html',
                            users=users,
