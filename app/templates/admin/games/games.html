@@ -1,94 +1,82 @@
 {% extends "base.html" %}
 {% block body %}
-    <div class="content-section">
-    <div class="outer">
-        <div class="middle">
-            <div class="inner">
-                <br/>
-                <h1 style="text-align:center;">Games</h1>
-                {% if games.items %}
-                    <hr class="intro-divider">
-                    <div class="center">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th width="55%"> Name</th>
-                                <th width="15%"> User Count</th>
-                                <th width="15%"> Edit</th>
-                                <th width="15%"> Delete</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for game in games.items %}
-                                <tr>
-                                    <td> {{ game.name }} </td>
-                                    <td>
-                                        {% if game.users %}
-                                            {{ game.users.count() }}
-                                        {% else %}
-                                            0
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <a href="{{ url_for('admin.edit_game', id=game.id) }}">
-                                            <i class="fa fa-pencil"></i> Edit
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ url_for('admin.delete_game', id=game.id) }}">
-                                            <i class="fa fa-trash"></i> Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <nav>
-                            <ul class="pager">
-                                {% if games.has_prev %}
-                                    <li class="previous">
-                                        <a href="{{ url_for('admin.list_games', page=games.prev_num) }}">
-                                            <span aria-hidden="true">&larr;</span>
-                                            Previous</a>
-                                    </li>
-                                {% else %}
-                                    <li class="previous disabled">
-                                        <a href="javascript:void(0)">
-                                            <span aria-hidden="true">&larr;</span>
-                                            Previous</a>
-                                    </li>
-                                {% endif %}
-
-                                {% if games.has_next %}
-                                    <li class="next">
-                                        <a href="{{ url_for('admin.list_games', page=games.next_num) }}">
-                                            Next <span
-                                                aria-hidden="true">&rarr;</span></a>
-                                    </li>
-                                {% else %}
-                                    <li class="next disabled">
-                                        <a href="javascript:void(0)">
-                                            Next <span
-                                                aria-hidden="true">&rarr;</span></a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </nav>
-                    </div>
-                    <div style="text-align: center">
+  <div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        <h1 style="text-align:center;">Games</h1>
+        {% if games.items %}
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th width="55%"> Name
+                  <th width="15%"> User Count
+                  <th width="15%"> Edit
+                  <th width="15%"> Delete
+              <tbody>
+              {% for game in games.items %}
+                <tr>
+                  <td> {{ game.name }}
+                  <td>
+                    {% if game.users %}
+                      {{ game.users.count() }}
+                    {% else %}
+                      0
+                    {% endif %}
+                  <td>
+                    <a href="{{ url_for('admin.edit_game', id=game.id) }}">
+                      <i class="fa fa-pencil"></i> Edit
+                    </a>
+                  <td>
+                    <a href="{{ url_for('admin.delete_game', id=game.id) }}">
+                      <i class="fa fa-trash"></i> Delete
+                    </a>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+            <nav>
+              <ul class="pager">
+                {% if games.has_prev %}
+                  <li class="previous">
+                    <a href="{{ url_for('admin.list_games', page=games.prev_num) }}">
+                      <span aria-hidden="true">&larr;</span>Previous</a>
                 {% else %}
-                    <div style="text-align: center">
-                    <h3> No games have been added. </h3>
-                    <hr class="intro-divider">
+                  <li class="previous disabled">
+                    <a href="javascript:void(0)">
+                      <span aria-hidden="true">&larr;</span>Previous</a>
                 {% endif %}
-                <a href="{{ url_for('admin.add_game') }}"
-                   class="btn btn-default btn-lg">
-                    <i class="fa fa-plus"></i>
-                    Add Game
-                </a>
-                </div>
-                </div>
-            </div>
+
+                {% if games.has_next %}
+                  <li class="next">
+                    <a href="{{ url_for('admin.list_games', page=games.next_num) }}">
+                      Next <span aria-hidden="true">&rarr;</span></a>
+                {% else %}
+                  <li class="next disabled">
+                    <a href="javascript:void(0)">
+                      Next <span aria-hidden="true">&rarr;</span></a>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+        {% else %}
+          <div style="text-align: center">
+            <h3> No games have been added. </h3>
+            <hr class="intro-divider">
+          </div>
+        {% endif %}
+        <div style="text-align: center">
+          <a href="{{ url_for('admin.add_game') }}"
+             class="btn btn-default btn-lg">
+            <i class="fa fa-plus"></i>
+            Add Game
+          </a>
         </div>
+        </div>
+      </div>
     </div>
+  </div>
 {% endblock %}
