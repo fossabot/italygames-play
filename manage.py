@@ -10,6 +10,9 @@ config_name = os.getenv('FLASK_CONFIG')
 new_app = create_app(config_name)
 manager = Manager(new_app)
 
+# Adds flask-migrate
+manager.add_command('db', MigrateCommand)
+
 
 @manager.option('-h', '--host', dest='host', default='127.0.0.1')
 @manager.option('-p', '--port', dest='port', default=8000)
@@ -34,12 +37,19 @@ def gunicorn(host, port, workers):
     return application.run()
 
 
-manager.add_command('db', MigrateCommand)
+@manager.command
+def create_db():
+    """Creates db structure"""
+    db.create_all()
 
 
 @manager.command
-def create_db():
-    db.create_all()
+def test():
+    """Run the unit tests."""
+    import unittest
+
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(tests)
 
 
 if __name__ == '__main__':
