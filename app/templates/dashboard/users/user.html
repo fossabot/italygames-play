@@ -1,33 +1,55 @@
 {% extends "base.html" %}
 {% block body %}
-  <div class="content-section">
-    <div class="outer">
-      <div class="middle">
-        <div class="inner">
-          <br/>
-          {% if user %}
-            <h1 style="text-align:center;">{{ user.username }}</h1>
-            <hr class="intro-divider">
-            <div class="center">
-              <ul>
-                <li>Num of games followed: {{ user.games.count() }}</li>
-                {% if user.games %}
-                  <ul>
-                    {% for game in user.games %}
-                      <li>
-                      <a href="{{ url_for('dashboard.view_game', id=game.id) }}">
-                        {{ game.name }}
-                      </a>
-                    {% endfor %}
-                  </ul>
-                {% else %}
-                  <p>The user doesn't follow any game.</p>
-                {% endif %}
-              </ul>
+  <div class="container intro-header">
+
+    {% if user %}
+      <div class="container content-section">
+        <div class="row">
+          <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+            <div class="col-sm-12">
+              <div class="col-xs-12 col-sm-12">
+                <h1>{{ user.username }}</h1>
+                <p><strong>Bio: </strong> Lorem ipsum dolor sit amet,
+                  consectetur adipisicing elit. Saepe rem
+                  nisi accusamus error velit animi non ipsa placeat. Recusandae,
+                  suscipit, soluta quibusdam accusamus a veniam quaerat eveniet
+                  eligendi dolor consectetur. </p>
+              </div>
             </div>
-          {% endif %}
+            <div class="col-xs-12 divider text-center">
+              <div class="col-xs-12 col-sm-4 emphasis">
+                <h2><strong> {{ user.games.count() }} </strong></h2>
+                <p>
+                  <small>Games followed</small>
+                </p>
+              </div>
+              <div class="col-xs-12 col-sm-8">
+                <span class="fa-stack fa-lg">
+                  <a href="#" class="social-icon telegram">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-reddit-alien fa-stack-1x fa-inverse"></i></a>
+                </span>
+                <span class="fa-stack fa-lg">
+                  <a href="#" class="social-icon telegram">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-steam fa-stack-1x fa-inverse"></i></a>
+                </span>
+                <span class="fa-stack fa-lg">
+                  <a href="#" class="social-icon telegram">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-telegram fa-stack-1x fa-inverse"></i></a>
+                </span>
+                <span class="fa-stack fa-lg">
+                  <a href="#" class="social-icon telegram">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-simplybuilt fa-stack-1x fa-inverse"></i></a>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}

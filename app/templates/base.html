@@ -2,10 +2,13 @@
 <head>
   <title>{{ title }} | Play</title>
   <!-- Bootstrap CDN -->
-  <link rel="stylesheet"
+  <!--<link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+        crossorigin="anonymous">-->
+  <!-- Bootstrap with Lumen theme https://bootswatch.com/ -->
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <!-- Custom CSS -->
   <link rel="stylesheet"
         href="{{ url_for('static', filename='css/style.css') }}">
@@ -42,12 +45,13 @@
           {% endif %}
           <li><a href="{{ url_for('dashboard.list_games') }}">Games</a>
           <li><a href="{{ url_for('dashboard.list_users') }}">Users</a>
-          <li><a href="{{ url_for('auth.logout') }}">Logout</a>
           <li><a href="{{ url_for('dashboard.view_user', username=current_user.username) }}">
-            <i class="fa fa-user"></i> Ciao, {{ current_user.username }}!</a>
+            <i class="fa fa-reddit-alien"></i> {{ current_user.username }}</a>
+          <li><a href="{{ url_for('auth.logout') }}">Logout</a>
         {% else %}
           <li><a href="{{ url_for('home.homepage') }}">Home</a>
-          <li><a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">Login</a>
+          <li><a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">
+            <i class="fa fa-reddit-alien"></i> Sign in with Reddit</a>
         {% endif %}
       </ul>
     </div>
