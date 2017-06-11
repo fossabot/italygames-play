@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
   <title>{{ title }} | Play</title>
-  <!-- Bootrstrap CDN -->
+  <!-- Bootstrap CDN -->
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -43,13 +43,11 @@
           <li><a href="{{ url_for('dashboard.list_games') }}">Games</a>
           <li><a href="{{ url_for('dashboard.list_users') }}">Users</a>
           <li><a href="{{ url_for('auth.logout') }}">Logout</a>
-          <li><a
-              href="{{ url_for('dashboard.view_user', username=current_user.username) }}">
-            <i class="fa fa-user"></i>Ciao, {{ current_user.username }}!</a>
-            {% else %}
+          <li><a href="{{ url_for('dashboard.view_user', username=current_user.username) }}">
+            <i class="fa fa-user"></i> Ciao, {{ current_user.username }}!</a>
+        {% else %}
           <li><a href="{{ url_for('home.homepage') }}">Home</a>
-          <li>
-          <a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">Login</a>
+          <li><a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">Login</a>
         {% endif %}
       </ul>
     </div>
@@ -66,6 +64,7 @@
       </ul>
     {% endif %}
   {% endwith %}
+
   <!-- Body -->
   {% block body %}
   {% endblock %}
@@ -88,9 +87,8 @@
             <li><a href="{{ url_for('dashboard.list_users') }}">Users</a>
             <li class="footer-menu-divider">⋅
             <li><a href="{{ url_for('auth.logout') }}">Logout</a>
-              {% else %}
-            <li>
-            <a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">Login</a>
+          {% else %}
+            <li><a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">Login</a>
           {% endif %}
         </ul>
       </div>
