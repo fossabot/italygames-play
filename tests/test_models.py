@@ -7,8 +7,6 @@ from app.models import User, Game
 class TestModels(TestCase):
     def create_app(self):
         app = create_app('testing')
-        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite://")
-
         return app
 
     def setUp(self):

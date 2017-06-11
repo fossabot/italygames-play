@@ -7,8 +7,6 @@ from app import create_app, db
 class TestBase(TestCase):
     def create_app(self):
         app = create_app('testing')
-        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite://")
-
         return app
 
     def setUp(self):

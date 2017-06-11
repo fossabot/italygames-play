@@ -1,33 +1,22 @@
 class Config(object):
-    """
-    Common configurations
-    """
-
+    """Common configurations"""
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class DevelopmentConfig(Config):
-    """
-    Development configurations
-    """
-
+    """Development configurations"""
     DEBUG = True
     SQLALCHEMY_ECHO = True
 
 
 class TestingConfig(Config):
-    """
-    Testing configurations
-    """
-
+    """Testing configurations"""
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = "sqlite://"
 
 
 class ProductionConfig(Config):
-    """
-    Production configurations
-    """
-
+    """Production configurations"""
     DEBUG = False
 
 
