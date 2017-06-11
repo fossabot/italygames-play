@@ -1,10 +1,14 @@
 import os
 import sys
 
+import coverage
 from flask_migrate import MigrateCommand
 from flask_script import Manager
 
 from app import create_app, db
+
+COV = coverage.coverage(branch=True, include='app/*')
+COV.start()
 
 config_name = os.getenv('FLASK_CONFIG')
 new_app = create_app(config_name)
@@ -50,6 +54,15 @@ def test():
 
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
+    COV.stop()
+    COV.save()
+    print('Coverage Summary:')
+    COV.report()
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    covdir = os.path.join(basedir, 'tmp/coverage')
+    COV.html_report(directory=covdir)
+    print('HTML version: file://%s/index.html' % covdir)
+    COV.erase()
 
 
 if __name__ == '__main__':
