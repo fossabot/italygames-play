@@ -1,3 +1,6 @@
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 class Config(object):
     """Common configurations"""
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -12,7 +15,8 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     """Testing configurations"""
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "sqlite://"
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
+        os.path.join(basedir, 'test_db.sqlite')
 
 
 class ProductionConfig(Config):

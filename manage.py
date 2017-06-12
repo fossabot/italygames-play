@@ -10,7 +10,7 @@ from app import create_app, db
 COV = coverage.coverage(branch=True, include='app/*')
 COV.start()
 
-config_name = os.getenv('FLASK_CONFIG')
+config_name = os.getenv('FLASK_CONFIG') or 'development'
 new_app = create_app(config_name)
 manager = Manager(new_app)
 
