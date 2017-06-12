@@ -1,5 +1,5 @@
 from flask import abort, render_template
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from . import users
 from ..models import Game, User
@@ -47,4 +47,10 @@ def filter_by_game(game_id, page):
 @users.route('/user/<string:username>/edit')
 @login_required
 def edit_profile(username):
-    pass
+    # placeholder, edit view to be implemented
+    if current_user.username != username:
+        abort(403)
+    # TODO: add edit form
+    return render_template('users/user.html',
+                           user=current_user,
+                           title=username)
