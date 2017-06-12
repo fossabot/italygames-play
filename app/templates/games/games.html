@@ -20,17 +20,17 @@
                 {% for game in games.items %}
                   <tr>
                     <td>
-                      <a href="{{ url_for('dashboard.view_game', id=game.id) }}">
+                      <a href="{{ url_for('games.get_by_id', id=game.id) }}">
                         {{ game.name }}</a>
                     <td>
-                      <a href="{{ url_for('dashboard.view_users_per_game', game_id=game.id) }}">
+                      <a href="{{ url_for('users.filter_by_game', game_id=game.id) }}">
                         {{ game.users.count() }}</a>
                     <td>
                       {% if game in current_user.games %}
-                        <a href="{{ url_for('dashboard.unfollow_game', game_id=game.id, user_id=current_user.id) }}">
+                        <a href="{{ url_for('games.unfollow', game_id=game.id, user_id=current_user.id) }}">
                           <i class="fa fa-remove"></i></a>
                       {% else %}
-                        <a href="{{ url_for('dashboard.follow_game', game_id=game.id, user_id=current_user.id) }}">
+                        <a href="{{ url_for('games.follow', game_id=game.id, user_id=current_user.id) }}">
                           <i class="fa fa-check"></i></a>
                       {% endif %}
                 {% endfor %}
@@ -39,7 +39,7 @@
                 <ul class="pager">
                   {% if games.has_prev %}
                     <li class="previous">
-                      <a href="{{ url_for('dashboard.list_games', page=games.prev_num) }}">
+                      <a href="{{ url_for('games.list', page=games.prev_num) }}">
                         <span aria-hidden="true">&larr;</span>Previous</a>
                   {% else %}
                     <li class="previous disabled">

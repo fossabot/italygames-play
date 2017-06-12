@@ -24,7 +24,7 @@ def oauth_authorize(provider):
         Provider name corresponding to the OAuthSignIn.provider_name
     """
     if not current_user.is_anonymous:
-        return redirect(url_for('dashboard.homepage'))
+        return redirect(url_for('games.list'))
     oauth = OAuthSignIn.get_provider(provider)
     return oauth.authorize()
 
@@ -44,7 +44,7 @@ def oauth_callback(provider):
         Provider name corresponding to the OAuthSignIn.provider_name
     """
     if not current_user.is_anonymous:
-        return redirect(url_for('dashboard.homepage'))
+        return redirect(url_for('games.list'))
     oauth = OAuthSignIn.get_provider(provider)
     social_id, username = oauth.callback()
 
@@ -59,7 +59,7 @@ def oauth_callback(provider):
         db.session.commit()
     login_user(user)
 
-    return redirect(url_for('dashboard.homepage'))
+    return redirect(url_for('games.list'))
 
 
 @auth.route('/logout')

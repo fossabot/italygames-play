@@ -43,11 +43,21 @@
           {% if current_user.is_admin %}
             <li><a href="{{ url_for('admin.list_games') }}">Manage Games</a>
           {% endif %}
-          <li><a href="{{ url_for('dashboard.list_games') }}">Games</a>
-          <li><a href="{{ url_for('dashboard.list_users') }}">Users</a>
-          <li><a href="{{ url_for('dashboard.view_user', username=current_user.username) }}">
-            <i class="fa fa-reddit-alien"></i> {{ current_user.username }}</a>
-          <li><a href="{{ url_for('auth.logout') }}">Logout</a>
+          <li><a href="{{ url_for('games.list') }}">Games</a>
+          <li><a href="{{ url_for('users.list') }}">Users</a>
+          <li class="dropdown">
+            <a role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-reddit-alien"></i> {{ current_user.username }}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dLabel">
+              <li><a href="{{ url_for('users.get_by_username', username=current_user.username) }}">View Profile
+              <li><a href="{{ url_for('users.edit_profile', username=current_user.username) }}">Edit Profile
+              <li role="separator" class="divider"></li>
+              <li><a href="{{ url_for('auth.logout') }}">Logout</a>
+            </ul>
+          </li>
+
         {% else %}
           <li><a href="{{ url_for('home.homepage') }}">Home</a>
           <li><a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">
@@ -86,9 +96,9 @@
           <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
           <li class="footer-menu-divider">⋅</li>
           {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('dashboard.list_games') }}">Games</a>
+            <li><a href="{{ url_for('games.list') }}">Games</a>
             <li class="footer-menu-divider">⋅
-            <li><a href="{{ url_for('dashboard.list_users') }}">Users</a>
+            <li><a href="{{ url_for('users.list') }}">Users</a>
             <li class="footer-menu-divider">⋅
             <li><a href="{{ url_for('auth.logout') }}">Logout</a>
           {% else %}

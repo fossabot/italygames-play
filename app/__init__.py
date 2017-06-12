@@ -49,8 +49,11 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    from .dashboard import dashboard as dashboard_blueprint
-    app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
+    from .games import games as games_blueprint
+    app.register_blueprint(games_blueprint)
+
+    from .users import users as users_blueprint
+    app.register_blueprint(users_blueprint)
 
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
