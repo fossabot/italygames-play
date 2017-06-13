@@ -1,6 +1,8 @@
-from flask import abort, render_template
+from flask import abort, render_template, url_for, redirect
 from flask_login import login_required, current_user
 
+from app import db
+from app.users.forms import UserForm
 from . import users
 from ..models import Game, User
 
@@ -44,13 +46,27 @@ def filter_by_game(game_id, page):
                            title='Users following ' + game.name)
 
 
-@users.route('/user/<string:username>/edit')
+@users.route('/user/<string:username>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_profile(username):
-    # placeholder, edit view to be implemented
+    """Edit profile"""
     if current_user.username != username:
         abort(403)
-    # TODO: add edit form
-    return render_template('users/user.html',
-                           user=current_user,
-                           title=username)
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(404)
+    form = UserForm(obj=user)
+
+    if form.validate_on_submit():
+        user.email = form.email.data
+        db.session.commit()
+
+        return redirect(
+            url_for('users.get_by_username', username=user.username))
+
+    form.email.data = user.email
+
+    return render_template('users/edit_profile.html',
+                           form=form,
+                           user=user,
+                           title='Edit Profile')
