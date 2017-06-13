@@ -39,27 +39,28 @@
     <!-- Navigation -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ url_for('home.homepage') }}">Home</a>
+        <li><a href="{{ url_for('games.list') }}">Games</a>
+        <li><a href="{{ url_for('users.list') }}">Users</a>
         {% if current_user.is_authenticated %}
           {% if current_user.is_admin %}
             <li><a href="{{ url_for('admin.list_games') }}">Manage Games</a>
           {% endif %}
-          <li><a href="{{ url_for('games.list') }}">Games</a>
-          <li><a href="{{ url_for('users.list') }}">Users</a>
+          <!-- User dropdown -->
           <li class="dropdown">
             <a role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-reddit-alien"></i> {{ current_user.username }}
-                <span class="caret"></span>
-            </a>
+                <span class="caret"></span></a>
             <ul class="dropdown-menu" aria-labelledby="dLabel">
-              <li><a href="{{ url_for('users.get_by_username', username=current_user.username) }}">View Profile
-              <li><a href="{{ url_for('users.edit_profile', username=current_user.username) }}">Edit Profile
+              <li><a href="{{ url_for('users.get_by_username',
+                              username=current_user.username) }}">View Profile
+              <li><a href="{{ url_for('users.edit_profile',
+                              username=current_user.username) }}">Edit Profile
               <li role="separator" class="divider"></li>
               <li><a href="{{ url_for('auth.logout') }}">Logout</a>
             </ul>
           </li>
-
         {% else %}
-          <li><a href="{{ url_for('home.homepage') }}">Home</a>
           <li><a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">
             <i class="fa fa-reddit-alien"></i> Sign in with Reddit</a>
         {% endif %}
@@ -95,10 +96,10 @@
         <ul class="list-inline">
           <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
           <li class="footer-menu-divider">⋅</li>
+          <li><a href="{{ url_for('games.list') }}">Games</a>
+          <li class="footer-menu-divider">⋅
+          <li><a href="{{ url_for('users.list') }}">Users</a>
           {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('games.list') }}">Games</a>
-            <li class="footer-menu-divider">⋅
-            <li><a href="{{ url_for('users.list') }}">Users</a>
             <li class="footer-menu-divider">⋅
             <li><a href="{{ url_for('auth.logout') }}">Logout</a>
           {% else %}

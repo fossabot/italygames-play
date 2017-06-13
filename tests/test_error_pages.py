@@ -22,13 +22,13 @@ class TestViews(TestCase):
         def forbidden_error():
             abort(403)
 
-        response = self.client.get('/403')
-        self.assertStatus(response, 403)
+        res = self.client.get('/403')
+        self.assertStatus(res, 403)
         self.assert_template_used('errors/403.html')
 
     def test_404_not_found(self):
-        response = self.client.get('/nothinghere')
-        self.assertStatus(response, 404)
+        res = self.client.get('/nothinghere')
+        self.assertStatus(res, 404)
         self.assert_template_used('errors/404.html')
 
     def test_500_internal_server_error(self):
@@ -37,6 +37,6 @@ class TestViews(TestCase):
         def internal_server_error():
             abort(500)
 
-        response = self.client.get('/500')
-        self.assertStatus(response, 500)
+        res = self.client.get('/500')
+        self.assertStatus(res, 500)
         self.assert_template_used('errors/500.html')
