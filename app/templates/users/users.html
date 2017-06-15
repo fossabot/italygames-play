@@ -1,4 +1,5 @@
 {% import "bootstrap/utils.html" as utils %}
+{% import "macros/search.html" as search %}
 {% extends "base.html" %}
 {% block body %}
   <div class="content-section">
@@ -7,8 +8,11 @@
         <div class="inner">
           <br/>
           <h1 style="text-align:center;">Users</h1>
+          <hr class="intro-divider">
+          <div class="center">
+            {{ search.search_widget('users.search') }}
+          </div>
           {% if users.items %}
-            <hr class="intro-divider">
             <div class="center">
               <table class="table table-striped table-bordered">
                 <thead>
@@ -52,8 +56,7 @@
             </div>
           {% else %}
             <div style="text-align: center">
-            <h3> No users have been added. </h3>
-            <hr class="intro-divider">
+            <h3> No users found. </h3>
           {% endif %}
           </div>
         </div>

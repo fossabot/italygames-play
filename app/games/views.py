@@ -1,4 +1,4 @@
-from flask import abort, render_template, redirect, url_for
+from flask import abort, render_template, redirect, url_for, request
 
 from . import games
 from .. import db
@@ -70,3 +70,23 @@ def filter_by_user(username, page):
     return render_template('games/games.html',
                            games=games,
                            title='Games of ' + username)
+
+
+@games.route('/games/search', methods=['POST'])
+def search():
+    name = request.form.get('query')
+    if name is None:
+        abort(404)
+    return redirect(url_for('games.search_results', name=name, page=1))
+
+
+@games.route('/games/search/<string:name>', defaults={'page': 1})
+@games.route('/games/search/<string:name>/page/<int:page>')
+def search_results(name, page):
+    games = Game.query \
+        .filter(Game.name.contains(name)) \
+        .paginate(page, PER_PAGE, error_out=None)
+
+    return render_template('games/games.html',
+                           games=games,
+                           title='Search')
