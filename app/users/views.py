@@ -1,4 +1,4 @@
-from flask import abort, render_template, url_for, redirect
+from flask import abort, render_template, url_for, redirect, request
 from flask_login import login_required, current_user
 
 from app import db
@@ -70,3 +70,23 @@ def edit_profile(username):
                            form=form,
                            user=user,
                            title='Edit Profile')
+
+
+@users.route('/users/search', methods=['POST'])
+def search():
+    username = request.form.get('query')
+    if username is None:
+        abort(404)
+    return redirect(url_for('users.search_results', username=username, page=1))
+
+
+@users.route('/users/search/<string:username>', defaults={'page': 1})
+@users.route('/users/search/<string:username>/page/<int:page>')
+def search_results(username, page):
+    users = User.query \
+        .filter(User.username.contains(username)) \
+        .paginate(page, PER_PAGE, error_out=None)
+
+    return render_template('users/users.html',
+                           users=users,
+                           title='Search')
