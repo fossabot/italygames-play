@@ -33,7 +33,7 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     """Production configurations"""
-    SQLALCHEMY_DATABASE_URI = os.getenv('DB_URI') or \
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'db.sqlite')
 
 
