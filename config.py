@@ -25,6 +25,8 @@ class TestingConfig(Config):
     """Testing configurations"""
     TESTING = True
     WTF_CSRF_ENABLED = False
+    # workaround for Flask-Testing bug
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
     SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DB_URI') or \
         'sqlite:///' + os.path.join(basedir, 'test_db.sqlite')
 
