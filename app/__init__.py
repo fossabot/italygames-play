@@ -19,8 +19,7 @@ def create_app(config_name):
     """Initiates all the dependencies and returns app instance"""
     app = Flask(__name__, instance_relative_config=True)
 
-    # Loads config.py and instance/config.py
-    app.config.from_pyfile('config.py')
+    # Loads config.py
     app.config.from_object(app_config[config_name])
 
     # Bootstrap setup
