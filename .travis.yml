@@ -3,8 +3,7 @@ python: 2.7
 cache: pip
 
 env:
-  - FLASK_CONFIG=testing
-  - FLASK_APP=manage.py
+  - FLASK_CONFIG=testing FLASK_APP=manage.py
 install:
   - pip install -r requirements.txt
 script:
