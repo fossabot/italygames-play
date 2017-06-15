@@ -3,51 +3,99 @@
 
     ~ Requisiti
 
-        docker, docker-compose
+        - python, virtualenv, mysql o sqlite3
 
-    ~ Configurazione
+        o
+
+        - docker, docker-compose
+
+    ~~~~ Configurazione Virtualenv ~~~~
+
+        ~ Configurazione environment
+
+            1. Eseguire i seguenti comandi
+                $ virtualenv venv
+                $ source venv/bin/activate
+                $ pip install -r requirements.txt
+
+            2. Impostare le seguenti variabili d'ambiente
+                FLASK_CONFIG=development|testing|production
+                FLASK_APP=manage.py
+                SECRET_KEY=chiavemoltosegreta
+                DEV_DB_URI|TEST_DB_URI|DB_URI=some_db://eccecc
+                OAUTH_REDDIT_ID=reddit_app_id
+                OAUTH_REDDIT_SECRET=reddit_app_secret
+
+
+        ~ Configurazione DB
+            $ python manage.py create_db
+            $ python manage.py db upgrade
+
+        ~ Esecuzione
+
+            - Server debug
+                $ python manage.py runserver
+
+            - Server production-like
+                $ python manage.py gunicorn
+
+                Parametri:
+                    -w  --workers   Numero di thread workers
+                    -p  --port      Porta in ascolto
+                    -h  --host      Indirizzo ascolto
+
+        ~ Test
+            $ python manage.py test
+
+            Parametri:
+                -c --coverage   Generazione report di coverage
+
+
+    ~~~~ Configurazione Docker ~~~~
+
+        ~ Configurazione environment
 
         1. File mysql.env configurato con
             MYSQL_ROOT_PASSWORD=root_pass
             MYSQL_DATABASE=db_name
             MYSQL_USER=db_user
-            MYSQL_PASSWORD=user_padd
+            MYSQL_PASSWORD=user_pass
 
-        2. File instance/config.py configurato con
-            - SECRET_KEY = 'chiavemoltosegreta'
-            - SQLALCHEMY_DATABASE_URI = 'db_uri'
-            - OAUTH_CREDENTIALS = {
-                'provider_name': {
-                    'id': 'provider_id',
-                    'secret': 'provider_secret'
-                }
-            }
+        2. File flask.env configurato con
+            FLASK_CONFIG=development|testing|production
+            FLASK_APP=manage.py
+            SECRET_KEY=chiavemoltosegreta
+            DEV_DB_URI|TEST_DB_URI|DB_URI=some_db://eccecc
+            OAUTH_REDDIT_ID=reddit_app_id
+            OAUTH_REDDIT_SECRET=reddit_app_secret
 
-    ~ Prima build
+        ~ Prima build
 
-        1. Buildare la docker image: docker-compose build
-        2. Avviare i container: docker-compose up
-        3. Creare tabelle nel db:
-            - sudo docker-compose run --rm web bash
-                > python manage.py create_db
-                > python manage.py db upgrade
+            1. Buildare la docker image
+                $ docker-compose build
+            2. Avviare i container
+                $ docker-compose up
+            3. Creare tabelle nel db:
+                $ sudo docker-compose run --rm web bash
+                    > python manage.py create_db
+                    > python manage.py db upgrade
 
-    ~ Esecuzione
+        ~ Esecuzione
 
-        docker-compose up
+            docker-compose up
 
-    ~ Manutenzione DB
+        ~ Manutenzione DB
 
-        Per generare lo script di migration, una volta eseguita la modifica:
-            - python manage.py migrate -m
-            - check dello script generato in migrations/versions
-            - python manage.py db upgrade
-            - commit della modifica
+            Per generare lo script di migration, una volta eseguita la modifica:
+                $ python manage.py migrate -m
+                - check dello script generato in migrations/versions
+                $ python manage.py db upgrade
+                - commit della modifica
 
-        Per migrare i db di prod:
-            - git pull origin master
-            - docker-compose stop
-            - docker-compose build
-            - docker-compose up -d
-            - sudo docker-compose run --rm web bash
-                > python manage.py db upgrade
+            Per migrare i db di prod:
+                $ git pull origin master
+                $ docker-compose stop
+                $ docker-compose build
+                $ docker-compose up -d
+                $ sudo docker-compose run --rm web bash
+                    > python manage.py db upgrade
