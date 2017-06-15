@@ -3,18 +3,20 @@ version: '2'
 services:
   mysql:
     image: mysql:5.5
-    volumes:
-      - mysql_data:/var/lib/mysql
     env_file:
       - mysql.env
+    volumes:
+      - mysql_data:/var/lib/mysql
 
 
   web:
     build: .
     depends_on:
       - mysql
+    env_file:
+      - flask.env
     ports:
-      - "5000:5000"
+      - "8000:8000"
     volumes:
       - .:/web
 

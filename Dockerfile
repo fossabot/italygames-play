@@ -7,7 +7,4 @@ COPY requirements.txt /web
 RUN pip install --no-cache-dir -r /web/requirements.txt
 COPY . /web
 
-ENV FLASK_CONFIG=development
-ENV FLASK_APP=run.py
-
 CMD ["python", "manage.py", "gunicorn", "-h", "0.0.0.0"]
