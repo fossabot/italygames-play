@@ -40,7 +40,7 @@ def follow(game_id, user_id):
     user.add_game(game)
     db.session.commit()
 
-    return redirect(url_for('games.list'))
+    return redirect(request.referrer or url_for('games.list'))
 
 
 @games.route('/game/<int:game_id>/unfollow/<int:user_id>',
@@ -53,7 +53,7 @@ def unfollow(game_id, user_id):
     user.remove_game(game)
     db.session.commit()
 
-    return redirect(url_for('games.list'))
+    return redirect(request.referrer or url_for('games.list'))
 
 
 @games.route('/user/<string:username>/games', defaults={'page': 1})
