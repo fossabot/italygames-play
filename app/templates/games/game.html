@@ -25,7 +25,8 @@
                 <hr>
                 <div class="row text-center">
                   <div class="col-xs-12 col-sm-6">
-                    <h2><strong> {{ game.users.count() }} </strong></h2>
+                    <h2><strong><a href="{{ url_for('users.filter_by_game', game_id=game.id) }}">
+                      {{ game.users.count() }}</a></strong></h2>
                     <p>
                       <small>Followers</small>
                     </p>
