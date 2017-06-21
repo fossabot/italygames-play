@@ -285,6 +285,7 @@ class TestViews(TestCase):
                 url_for('users.filter_by_game', game_id=game.id))
             self.assert200(res)
             self.assert_template_used('users/users.html')
+            user = db.session.merge(user)
             self.assertIn(str(user.username), res.data)
 
     def test_users_search(self):
