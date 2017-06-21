@@ -26,15 +26,6 @@
                   </p>
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                  <!-- TODO: ADD SOCIAL AND GAME LINKS -->
-                    <!-- <a href="#" class="btn btn-social-icon btn-reddit">
-                      <i class="fa fa-reddit-alien"></i></a>
-                    <a href="#" class="btn btn-social-icon btn-steam">
-                      <i class="fa fa-steam"></i></a>
-                    <a href="#" class="btn btn-social-icon btn-telegram">
-                      <i class="fa fa-telegram"></i></a>
-                    <a href="#" class="btn btn-social-icon btn-discord">
-                      <i class="fa fa-simplybuilt"></i></a> -->
                   {% set socials = user.get_socials_dict() %}
                   <dl class="dl-horizontal dl-profile">
                     {% if socials['Telegram'] %}<dt>Telegram</dt><dd>{{ socials['Telegram'] }}</dd>{% endif %}
