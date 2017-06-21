@@ -9,11 +9,9 @@
               <div class="col-sm-12">
                 <div class="col-xs-12 col-sm-12">
                   <h1>{{ user.username }}</h1>
-                  <p><strong>Bio: </strong> Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit. Saepe rem
-                    nisi accusamus error velit animi non ipsa placeat. Recusandae,
-                    suscipit, soluta quibusdam accusamus a veniam quaerat eveniet
-                    eligendi dolor consectetur. </p>
+                  {% if user.bio %}
+                  <p><strong>Bio: </strong> {{ user.bio }}</p>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -28,29 +26,27 @@
                   </p>
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                  <!-- TODO: ADD SOCIAL AND GAME LINKS -->
-                    <!-- <a href="#" class="btn btn-social-icon btn-reddit">
-                      <i class="fa fa-reddit-alien"></i></a>
-                    <a href="#" class="btn btn-social-icon btn-steam">
-                      <i class="fa fa-steam"></i></a>
-                    <a href="#" class="btn btn-social-icon btn-telegram">
-                      <i class="fa fa-telegram"></i></a>
-                    <a href="#" class="btn btn-social-icon btn-discord">
-                      <i class="fa fa-simplybuilt"></i></a> -->
+                  {% set socials = user.get_socials_dict() %}
                   <dl class="dl-horizontal dl-profile">
-                    <dt>Telegram</dt><dd>Antani</dd>
-                    <dt>Discord</dt><dd>Antani</dd>
-                    <dt>Reddit</dt><dd>Antani</dd>
+                    {% if socials['Telegram'] %}<dt>Telegram</dt><dd>{{ socials['Telegram'] }}</dd>{% endif %}
+                    {% if socials['Discord'] %}<dt>Discord</dt><dd>{{ socials['Discord'] }}</dd>{% endif %}
+                    {% if socials['Reddit'] %}<dt>Reddit</dt><dd>{{ socials['Reddit'] }}</dd>{% endif %}
+                    {% if not (socials['Telegram'] or socials['Discord'] or socials['Reddit']) %}
+                      <small>This user hasn't added any social platform profile yet :(</small>
+                    {% endif %}
                   </dl>
                 <p><small>Get in touch</small></p>
                 </div>
                 <div class="col-xs-12 col-sm-4">
                   <dl class="dl-horizontal  dl-profile">
-                    <dt>Steam</dt><dd>Antani</dd>
-                    <dt>Origin</dt><dd>Antani</dd>
-                    <dt>Blizzard</dt><dd>Antani</dd>
+                    {% if socials['Steam'] %}<dt>Steam</dt><dd>{{ socials['Steam'] }}</dd>{% endif %}
+                    {% if socials['Origin'] %}<dt>Origin</dt><dd>{{ socials['Origin'] }}</dd>{% endif %}
+                    {% if socials['Blizzard'] %}<dt>Blizzard</dt><dd>{{ socials['Blizzard'] }}</dd>{% endif %}
+                    {% if not (socials['Steam'] or socials['Origin'] or socials['Blizzard']) %}
+                        <small>This user hasn't added any gaming platform profile yet :(</small>
+                    {% endif %}
                   </dl>
-                  <p><small>Play together</small></p>
+                    <small>Play together</small>
                 </div>
               </div>
             </div>

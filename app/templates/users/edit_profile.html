@@ -11,7 +11,10 @@
           <div class="center">
             <h1>Edit Profile</h1>
             <br/>
-            {{ wtf.quick_form(form) }}
+            {{ wtf.quick_form(user_form) }}
+            <hr/>
+            <h3>Social</h3>
+            {{ wtf.quick_form(social_form) }}
           </div>
         </div>
       </div>

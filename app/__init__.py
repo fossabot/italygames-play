@@ -25,6 +25,9 @@ def create_app(config_name):
     # Bootstrap setup
     Bootstrap(app)
 
+    # Import models, necessary to have for flask-migrate
+    from app import models
+
     # db setup
     db.init_app(app)
 
