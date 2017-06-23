@@ -255,6 +255,10 @@ class TestViews(TestCase):
             game = db.session.merge(game)
             self.assertIn(str(game.name), res.data)
 
+    def test_games_search(self):
+        # TODO: implement
+        pass
+
     def test_users_list(self):
         user = self.create_mock_user()
         res = self.client.get(url_for('users.list'))
@@ -281,7 +285,12 @@ class TestViews(TestCase):
                 url_for('users.filter_by_game', game_id=game.id))
             self.assert200(res)
             self.assert_template_used('users/users.html')
+            user = db.session.merge(user)
             self.assertIn(str(user.username), res.data)
+
+    def test_users_search(self):
+        # TODO: implement
+        pass
 
     def test_users_edit_profile(self):
         # TODO: implement

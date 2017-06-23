@@ -25,6 +25,9 @@ def create_app(config_name):
     # Bootstrap setup
     Bootstrap(app)
 
+    # Import models, necessary to have for flask-migrate
+    from app import models
+
     # db setup
     db.init_app(app)
 
@@ -70,6 +73,13 @@ def create_app(config_name):
     @app.errorhandler(500)
     def internal_server_error(error):
         return render_template('errors/500.html', title='Server Error'), 500
+
+    # Route necessary for letsencrypt certbot
+    @app.route('/.well-known/acme-challenge/<token_value>')
+    def letsencrypt(token_value):
+        with open('.well-known/acme-challenge/{}'.format(token_value)) as f:
+            answer = f.readline().strip()
+        return answer
 
     # Session handling
     # Necessary to refresh sessions and reflect data changes

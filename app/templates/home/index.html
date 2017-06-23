@@ -8,15 +8,14 @@
       <div class="row">
         <div class="col-md-8">
           <img class="img-responsive img-rounded"
-               src="http://placehold.it/900x350" alt="">
+               src="https://placehold.it/900x350" alt="">
         </div>
         <div class="col-md-4">
           <h1>ItalyGames Play</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem
-            nisi accusamus error velit animi non ipsa placeat. Recusandae,
-            suscipit, soluta quibusdam accusamus a veniam quaerat eveniet
-            eligendi dolor consectetur.</p>
-          <a class="btn btn-primary btn-lg" href="#">Lorem ipsum</a>
+            <p>A website built by reddit gamers for reddit gamers. Born from an idea of a few people
+            at <a href="https://reddit.com/r/italygames">/r/italygames</a>, Play lets you
+            find other gamers to play your favorite games with. </p>
+          <a class="btn btn-primary" href="https://reddit.com/r/italygames">Find us on /r/italygames</a>
         </div>
       </div>
       <!-- /.row -->
@@ -26,7 +25,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="well text-center">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Join the ItalyGames Play community in three easy steps.
           </div>
         </div>
       </div>
@@ -35,30 +34,28 @@
       <!-- Content Row -->
       <div class="row">
         <div class="col-md-4">
-          <h2>Heading 1</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem
-            nisi accusamus error velit animi non ipsa placeat. Recusandae,
-            suscipit, soluta quibusdam accusamus a veniam quaerat eveniet
-            eligendi dolor consectetur.</p>
-          <a class="btn btn-default" href="#">More Info</a>
+          <h3>Login</h3>
+            <p><strong>Step 1:</strong>  Sign in</p>
+            <p>Fast and easy Reddit login, no registration needed!</p>
+          <a class="btn btn-default btn-sm" href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">
+            <i class="fa fa-reddit-alien"></i> Sign in with Reddit</a>
         </div>
 
         <div class="col-md-4">
-          <h2>Heading 2</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem
-            nisi accusamus error velit animi non ipsa placeat. Recusandae,
-            suscipit, soluta quibusdam accusamus a veniam quaerat eveniet
-            eligendi dolor consectetur.</p>
-          <a class="btn btn-default" href="#">More Info</a>
+          <h2>Browse</h2>
+          <p><strong>Step 2:</strong> Follow your favorite games</p>
+          <p>Browse the most popular games around and follow your favorite ones to be matched with other gamers.</p>
+          <a class="btn btn-default btn-sm" href="{{ url_for('games.list') }}">
+              <i class="fa fa-gamepad"></i> Follow Games</a>
         </div>
 
         <div class="col-md-4">
-          <h2>Heading 3</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem
-            nisi accusamus error velit animi non ipsa placeat. Recusandae,
-            suscipit, soluta quibusdam accusamus a veniam quaerat eveniet
-            eligendi dolor consectetur.</p>
-          <a class="btn btn-default" href="#">More Info</a>
+          <h2>Play!</h2>
+          <p><strong>Step 3:</strong> Find your gaming buddy</p>
+          <p>Find users who shares the same games you do, get in touch and play!
+              Don't forget to setup your social and gaming usernames on your profile page.</p>
+          <a class="btn btn-default btn-sm" href="{{ url_for('users.list') }}">
+              <i class="fa fa-users"></i> Find Users</a>
         </div>
 
       </div>

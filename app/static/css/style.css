@@ -5,7 +5,7 @@ body, html {
 
 .center {
     margin: auto;
-    width: 50%;
+    width: 70%;
     padding: 10px;
 }
 
@@ -20,19 +20,30 @@ body, html {
 }
 
 .wrapper {
-    min-height: 100%;
+    min-height: 70%;
     height: auto;
 }
 
-.outer {
+/*.outer {
     display: table;
     position: absolute;
     height: 70%;
     width: 100%;
-}
+}*/
 
 .middle {
     vertical-align: middle;
+}
+
+.dl-profile dd {
+    margin-left: 50%;
+}
+
+.dl-profile dt {
+    clear: left;
+    float: left;
+    width: 50%;
+    margin: 0;
 }
 
 .inner {
@@ -43,48 +54,3 @@ body, html {
 footer {
     padding: 50px 0;
 }
-
-
-
-/**
- * Social Buttons for Bootstrap
- *
- * Copyright 2013-2014 Panayiotis Lipiridis
- * Licensed under the MIT License
- *
- * https://steam.com/lipis/bootstrap-social
- */
-
-.btn-social{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.btn-social :first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
-.btn-social.btn-lg{padding-left:61px}.btn-social.btn-lg :first-child{line-height:45px;width:45px;font-size:1.8em}
-.btn-social.btn-sm{padding-left:38px}.btn-social.btn-sm :first-child{line-height:28px;width:28px;font-size:1.4em}
-.btn-social.btn-xs{padding-left:30px}.btn-social.btn-xs :first-child{line-height:20px;width:20px;font-size:1.2em}
-.btn-social-icon{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:34px;width:34px;padding:0}.btn-social-icon :first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
-.btn-social-icon.btn-lg{padding-left:61px}.btn-social-icon.btn-lg :first-child{line-height:45px;width:45px;font-size:1.8em}
-.btn-social-icon.btn-sm{padding-left:38px}.btn-social-icon.btn-sm :first-child{line-height:28px;width:28px;font-size:1.4em}
-.btn-social-icon.btn-xs{padding-left:30px}.btn-social-icon.btn-xs :first-child{line-height:20px;width:20px;font-size:1.2em}
-.btn-social-icon :first-child{border:none;text-align:center;width:100% !important}
-.btn-social-icon.btn-lg{height:45px;width:45px;padding-left:0;padding-right:0}
-.btn-social-icon.btn-sm{height:30px;width:30px;padding-left:0;padding-right:0}
-.btn-social-icon.btn-xs{height:22px;width:22px;padding-left:0;padding-right:0}
-
-/* Telegram button */
-.btn-telegram{color:#fff;background-color:#55acee;border-color:rgba(0,0,0,0.2)}.btn-telegram:hover,.btn-telegram:focus,.btn-telegram:active,.btn-telegram.active,.open .dropdown-toggle.btn-telegram{color:#fff;background-color:#309aea;border-color:rgba(0,0,0,0.2)}
-.btn-telegram:active,.btn-telegram.active,.open .dropdown-toggle.btn-telegram{background-image:none}
-.btn-telegram.disabled,.btn-telegram[disabled],fieldset[disabled] .btn-telegram,.btn-telegram.disabled:hover,.btn-telegram[disabled]:hover,fieldset[disabled] .btn-telegram:hover,.btn-telegram.disabled:focus,.btn-telegram[disabled]:focus,fieldset[disabled] .btn-telegram:focus,.btn-telegram.disabled:active,.btn-telegram[disabled]:active,fieldset[disabled] .btn-telegram:active,.btn-telegram.disabled.active,.btn-telegram[disabled].active,fieldset[disabled] .btn-telegram.active{background-color:#55acee;border-color:rgba(0,0,0,0.2)}
-
-/* Steam button */
-.btn-steam{color:#fff;background-color:#444;border-color:rgba(0,0,0,0.2)}.btn-steam:hover,.btn-steam:focus,.btn-steam:active,.btn-steam.active,.open .dropdown-toggle.btn-steam{color:#fff;background-color:#303030;border-color:rgba(0,0,0,0.2)}
-.btn-steam:active,.btn-steam.active,.open .dropdown-toggle.btn-steam{background-image:none}
-.btn-steam.disabled,.btn-steam[disabled],fieldset[disabled] .btn-steam,.btn-steam.disabled:hover,.btn-steam[disabled]:hover,fieldset[disabled] .btn-steam:hover,.btn-steam.disabled:focus,.btn-steam[disabled]:focus,fieldset[disabled] .btn-steam:focus,.btn-steam.disabled:active,.btn-steam[disabled]:active,fieldset[disabled] .btn-steam:active,.btn-steam.disabled.active,.btn-steam[disabled].active,fieldset[disabled] .btn-steam.active{background-color:#444;border-color:rgba(0,0,0,0.2)}
-
-/* Discord button */
-.btn-discord{color:#fff;background-color:#7289DA;border-color:rgba(0,0,0,0.2)}.btn-discord:hover,.btn-discord:focus,.btn-discord:active,.btn-discord.active,.open .dropdown-toggle.btn-discord{color:#fff;background-color:#6174BF;border-color:rgba(0,0,0,0.2)}
-.btn-discord:active,.btn-discord.active,.open .dropdown-toggle.btn-discord{background-image:none}
-.btn-discord.disabled,.btn-discord[disabled],fieldset[disabled] .btn-discord,.btn-discord.disabled:hover,.btn-discord[disabled]:hover,fieldset[disabled] .btn-discord:hover,.btn-discord.disabled:focus,.btn-discord[disabled]:focus,fieldset[disabled] .btn-discord:focus,.btn-discord.disabled:active,.btn-discord[disabled]:active,fieldset[disabled] .btn-discord:active,.btn-discord.disabled.active,.btn-discord[disabled].active,fieldset[disabled] .btn-discord.active{background-color:#7289DA;border-color:rgba(0,0,0,0.2)}
-
-/* Reddit button */
-.btn-reddit{color:#fff;background-color:#5f99cf;border-color:rgba(0,0,0,0.2)}.btn-reddit:hover,.btn-reddit:focus,.btn-reddit:active,.btn-reddit.active,.open .dropdown-toggle.btn-reddit{color:#fff;background-color:#5D86BA;border-color:rgba(0,0,0,0.2)}
-.btn-reddit:active,.btn-reddit.active,.open .dropdown-toggle.btn-reddit{background-image:none}
-.btn-reddit.disabled,.btn-reddit[disabled],fieldset[disabled] .btn-reddit,.btn-reddit.disabled:hover,.btn-reddit[disabled]:hover,fieldset[disabled] .btn-reddit:hover,.btn-reddit.disabled:focus,.btn-reddit[disabled]:focus,fieldset[disabled] .btn-reddit:focus,.btn-reddit.disabled:active,.btn-reddit[disabled]:active,fieldset[disabled] .btn-reddit:active,.btn-reddit.disabled.active,.btn-reddit[disabled].active,fieldset[disabled] .btn-reddit.active{background-color:#5f99cf;border-color:rgba(0,0,0,0.2)}
-
