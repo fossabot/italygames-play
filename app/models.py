@@ -156,7 +156,7 @@ class UserSocialID(db.Model):
 
 # Populate Social table with default data
 @event.listens_for(Social.__table__, 'after_create')
-def populate():
+def populate(*args, **kwargs):
     socials = ['Reddit', 'Telegram', 'Discord', 'Steam', 'Origin', 'Blizzard']
     for social_name in socials:
         db.session.add(Social(name=social_name))
