@@ -62,7 +62,7 @@ def edit_profile(username):
     social_form = SocialForm(obj=user.get_socials_dict())
 
     # Check that UserForm is submitted
-    if user_form.validate_on_submit():
+    if user_form.submit_user.data and user_form.validate_on_submit():
         user.email = user_form.email.data
         user.bio = user_form.bio.data
         db.session.commit()
@@ -70,7 +70,7 @@ def edit_profile(username):
             url_for('users.get_by_username', username=user.username))
 
     # Check that SocialForm is submitted
-    if social_form.validate_on_submit():
+    if social_form.submit_social.data and social_form.validate_on_submit():
         user.set_socials_by_form(social_form)
         db.session.commit()
         return redirect(

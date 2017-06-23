@@ -1,15 +1,15 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
-from wtforms.validators import Email
+from wtforms.validators import Email, Optional
 
 from ..models import Social
 
 # TODO: add max length validator to fields
 class UserForm(FlaskForm):
     """WTForm for users to edit profile"""
-    email = StringField('E-mail', validators=[Email()])
+    email = StringField('E-mail', validators=[Optional(), Email()])
     bio = TextAreaField('Bio', render_kw={'rows': 5})
-    submit = SubmitField('Save')
+    submit_user = SubmitField('Save')
 
 class SocialForm(FlaskForm):
     """WTForm for user social profiles"""
@@ -19,4 +19,4 @@ class SocialForm(FlaskForm):
     steam = StringField('Steam')
     origin = StringField('Origin')
     blizzard = StringField('Blizzard')
-    submit = SubmitField('Save')
+    submit_social = SubmitField('Save')
