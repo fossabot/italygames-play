@@ -33,7 +33,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand topnav"
-         href="{{ url_for('home.homepage') }}">Play</a>
+         href="{{ url_for('home.homepage') }}">ItalyGames Play</a>
     </div>
 
     <!-- Navigation -->
@@ -99,12 +99,14 @@
           <li><a href="{{ url_for('games.list') }}">Games</a>
           <li class="footer-menu-divider">⋅
           <li><a href="{{ url_for('users.list') }}">Users</a>
+          <li class="footer-menu-divider">⋅
           {% if current_user.is_authenticated %}
-            <li class="footer-menu-divider">⋅
             <li><a href="{{ url_for('auth.logout') }}">Logout</a>
           {% else %}
             <li><a href="{{ url_for('auth.oauth_authorize', provider='reddit') }}">Login</a>
           {% endif %}
+          <li class="footer-menu-divider">⋅
+          <li>ItalyGames Play is open-source and you can help it grow! Check the source code on <a href="https://github.com/acifani/italygames-play">GitHub</a>.
         </ul>
       </div>
     </div>
