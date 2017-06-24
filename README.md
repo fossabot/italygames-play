@@ -120,3 +120,9 @@ If you have any question or feedback please do get in touch with us on:
 * [Subreddit](https://www.reddit.com/r/italygames/) /r/italygames
 * [Telegram](https://t.me/joinchat/AAAAAEHF2KTVrbvj899Vsw) group
 * [Discord](https://discord.gg/4SYwXK8) room
+
+## License
+The content of this project itself is licensed under the 
+[Creative Commons Attribution 3.0 license](https://creativecommons.org/licenses/by/3.0/), 
+and the underlying source code used to format and display that content is licensed 
+under the [MIT License](https://opensource.org/licenses/MIT).
