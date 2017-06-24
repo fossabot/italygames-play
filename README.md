@@ -63,7 +63,7 @@ You need to setup the following environment variables (`export VARIABLE=VALUE` i
 
 `OAUTH_REDDIT_ID` `OAUTH_REDDIT_SECRET`: The reddit app ID and Secret key, you can get those [here](https://www.reddit.com/prefs/apps) after you register your app.
 
-#### DB First time setup
+#### Database first time setup
 ```
 (venv)$ python manage.py create_db
 (venv)$ python manage.py db stamp head
@@ -71,7 +71,7 @@ You need to setup the following environment variables (`export VARIABLE=VALUE` i
 
 ### Run
 
-##### Development server
+#### Development server
 ```
 (venv)$ python manage.py runserver
 ```
