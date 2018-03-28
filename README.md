@@ -1,4 +1,6 @@
 # ItalyGames Play
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Facifani%2Fitalygames-play.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Facifani%2Fitalygames-play?ref=badge_shield)
+
 
 A bunch of us over at italygames felt the necessity to create a tool that would 
 let us find other gamers to play with. [Play](https://play.italyga.me) is born 
@@ -126,3 +128,6 @@ The content of this project itself is licensed under the
 [Creative Commons Attribution 3.0 license](https://creativecommons.org/licenses/by/3.0/), 
 and the underlying source code used to format and display that content is licensed 
 under the [MIT License](https://opensource.org/licenses/MIT).
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Facifani%2Fitalygames-play.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Facifani%2Fitalygames-play?ref=badge_large)
